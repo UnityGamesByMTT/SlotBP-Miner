@@ -214,14 +214,14 @@ public class SlotBehaviour : MonoBehaviour
         if(currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
-            if (AutoSpin_Button) AutoSpin_Button.interactable = false;
-            if (SlotStart_Button) SlotStart_Button.interactable = false;
+            //if (AutoSpin_Button) AutoSpin_Button.interactable = false;
+            //if (SlotStart_Button) SlotStart_Button.interactable = false;
         }
-        else
-        {
-            if (AutoSpin_Button) AutoSpin_Button.interactable = true;
-            if (SlotStart_Button) SlotStart_Button.interactable = true;
-        }
+        //else
+        //{
+        //    if (AutoSpin_Button) AutoSpin_Button.interactable = true;
+        //    if (SlotStart_Button) SlotStart_Button.interactable = true;
+        //}
     }
 
     internal void FetchLines(string LineVal, int count)
@@ -356,9 +356,9 @@ public class SlotBehaviour : MonoBehaviour
             }
         }
 
+        currentTotalBet = SocketManager.initialData.Bets[BetCounter] * SocketManager.initialData.Lines.Count;
         if(BetPerLine_text) BetPerLine_text.text=SocketManager.initialData.Bets[BetCounter].ToString();
         if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.Bets[BetCounter]*SocketManager.initialData.Lines.Count).ToString();
-        currentTotalBet = SocketManager.initialData.Bets[BetCounter] * Lines;
         CompareBalance();
     }
 
@@ -448,6 +448,7 @@ public class SlotBehaviour : MonoBehaviour
             CompareBalance();
             StopAutoSpin();
             yield return new WaitForSeconds(1);
+            ToggleButtonGrp(true);
             yield break;
         }
 
@@ -503,6 +504,7 @@ public class SlotBehaviour : MonoBehaviour
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
 
+        currentBalance = SocketManager.playerdata.Balance;
 
         CheckPopups = true;
 
@@ -530,7 +532,6 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitUntil(() => !CheckPopups);
         if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString();
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString();
-        currentBalance = SocketManager.playerdata.Balance;
 
         if (!IsAutoSpin && !IsFreeSpin)
         {
