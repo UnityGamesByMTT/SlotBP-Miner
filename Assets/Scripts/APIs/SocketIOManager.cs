@@ -34,7 +34,7 @@ public class SocketIOManager : MonoBehaviour
     private SocketManager manager;
 
     protected string SocketURI = null;
-    protected string TestSocketURI = "http://localhost:5001";
+    protected string TestSocketURI = "http://localhost:5000";
 
     [SerializeField]
     private string testToken;
