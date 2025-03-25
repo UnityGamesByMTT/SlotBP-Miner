@@ -183,7 +183,7 @@ public class UIManager : MonoBehaviour
         if (Setting_exit_button) Setting_exit_button.onClick.AddListener(delegate { ClosePopup(settingObject); if (audioController) audioController.PlayButtonAudio(); });
 
         if (CloseDisconnect_Button) CloseDisconnect_Button.onClick.RemoveAllListeners();
-        if (CloseDisconnect_Button) CloseDisconnect_Button.onClick.AddListener(CallOnExitFunction);
+        if (CloseDisconnect_Button) CloseDisconnect_Button.onClick.AddListener(()=>{CallOnExitFunction(); socketManager.closeSocketReactnativeCall();});
 
         // if (audioController) audioController.ToggleMute(false);
 
